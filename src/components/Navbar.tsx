@@ -1,11 +1,14 @@
+import Icon from './Icon';
 import './Navbar.css';
 
 interface NavbarProps {
   currentPage: string;
   onNavigate: (page: string) => void;
+  notifications: number;
+  onClearNotifications: () => void;
 }
 
-function Navbar({ currentPage, onNavigate }: NavbarProps) {
+function Navbar({ currentPage, onNavigate, notifications, onClearNotifications }: NavbarProps) {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -41,6 +44,12 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
           </a>
         </li>
       </ul>
+      <div className="navbar-actions">
+        <div className="notification-bell" onClick={onClearNotifications} aria-label={`You have ${notifications} new notifications`}>
+          <Icon name="bell" />
+          {notifications > 0 && <span className="notification-badge">{notifications}</span>}
+        </div>
+      </div>
     </nav>
   );
 }

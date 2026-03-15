@@ -63,3 +63,38 @@
   background: rgba(255, 255, 255, 0.15);
   color: white;
 }
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notification-bell {
+  position: relative;
+  cursor: pointer;
+  color: var(--navbar-link);
+  width: 20px;
+  height: 20px;
+}
+
+.notification-bell:hover {
+  color: white;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--accent);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Allows click to pass through to bell */
+}

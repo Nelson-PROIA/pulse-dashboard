@@ -8,6 +8,7 @@ import './App.css';
 
 function App() {
   const [currentPage, setCurrentPage] = useLocalStorage('pulse-page', 'dashboard');
+  const [notifications, setNotifications] = useLocalStorage('pulse-notifications', 3);
 
   // Keyboard shortcuts
   useKeyboard({
@@ -27,11 +28,17 @@ function App() {
     }
   };
 
+  const handleClearNotifications = () => {
+    setNotifications(0);
+  };
+
   return (
     <div className="app">
       <Navbar
         currentPage={currentPage}
         onNavigate={setCurrentPage}
+        notifications={notifications}
+        onClearNotifications={handleClearNotifications}
       />
       <main className="main-content">
         {renderPage()}
