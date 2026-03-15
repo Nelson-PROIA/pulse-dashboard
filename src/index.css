@@ -26,22 +26,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root[data-theme='dark'] {
-  --text: #94a3b8;
-  --text-h: #f1f5f9;
-  --bg: #0f172a;
-  --border: #1e293b;
-  --card-bg: #1e293b;
-  --accent: #818cf8;
-  --accent-bg: rgba(129, 140, 248, 0.1);
-  --accent-border: rgba(129, 140, 248, 0.3);
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-
-  --navbar-bg: #1e293b;
-  --navbar-text: #f1f5f9;
-  --navbar-link: #64748b;
-}
-
 * {
   box-sizing: border-box;
 }
