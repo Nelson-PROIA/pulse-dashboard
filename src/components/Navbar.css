@@ -63,3 +63,21 @@
   background: rgba(255, 255, 255, 0.15);
   color: white;
 }
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--navbar-link);
+  cursor: pointer;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
