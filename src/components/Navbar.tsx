@@ -1,4 +1,6 @@
 import './Navbar.css';
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface NavbarProps {
   currentPage: string;
@@ -6,6 +8,16 @@ interface NavbarProps {
 }
 
 function Navbar({ currentPage, onNavigate }: NavbarProps) {
+  const [isDark, setIsDark] = useLocalStorage('pulse-dark-mode', false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  const toggleTheme = () => {
+    setIsDark((prev: boolean) => !prev);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -39,6 +51,11 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
           >
             Team
           </a>
+        </li>
+        <li>
+          <div className="theme-toggle" data-theme={isDark ? 'dark' : 'light'} onClick={toggleTheme}>
+            <div className="theme-toggle-dot"></div>
+          </div>
         </li>
       </ul>
     </nav>
