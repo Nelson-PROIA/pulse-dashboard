@@ -3,9 +3,11 @@ import './Navbar.css';
 interface NavbarProps {
   currentPage: string;
   onNavigate: (page: string) => void;
+  isDarkMode: boolean;
+  onToggleDarkMode: () => void;
 }
 
-function Navbar({ currentPage, onNavigate }: NavbarProps) {
+function Navbar({ currentPage, onNavigate, isDarkMode, onToggleDarkMode }: NavbarProps) {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -39,6 +41,11 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
           >
             Team
           </a>
+        </li>
+        <li>
+          <button className="theme-toggle" onClick={onToggleDarkMode} aria-label="Toggle dark mode">
+            {isDarkMode ? '🌞' : '🌙'}
+          </button>
         </li>
       </ul>
     </nav>
