@@ -1,5 +1,5 @@
 import './Navbar.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface NavbarProps {
