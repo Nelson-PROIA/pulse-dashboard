@@ -9,3 +9,21 @@
 .main-content {
   flex: 1;
 }
+
+.footer {
+  padding: 1rem 2rem;
+  background: var(--navbar-bg);
+  color: var(--navbar-link);
+  text-align: center;
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer a {
+  color: var(--navbar-link);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

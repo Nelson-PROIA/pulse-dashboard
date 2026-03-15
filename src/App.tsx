@@ -36,6 +36,12 @@ function App() {
       <main className="main-content">
         {renderPage()}
       </main>
+      <footer className="footer">
+        © {new Date().getFullYear()} Pulse. All rights reserved. Made with ❤️ by{' '}
+        <a href="https://github.com/sandbanks" target="_blank" rel="noopener noreferrer">
+          Sandbanks
+        </a>
+      </footer>
     </div>
   );
 }
