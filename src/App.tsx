@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import TaskBoard from './pages/TaskBoard';
@@ -8,12 +9,26 @@ import './App.css';
 
 function App() {
   const [currentPage, setCurrentPage] = useLocalStorage('pulse-page', 'dashboard');
+  const [isDarkMode, setIsDarkMode] = useLocalStorage('pulse-dark-mode', false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev: boolean) => !prev);
+  };
 
   // Keyboard shortcuts
   useKeyboard({
     '1': () => setCurrentPage('dashboard'),
     '2': () => setCurrentPage('tasks'),
     '3': () => setCurrentPage('team'),
+    'mod+k': toggleDarkMode, // Cmd+K or Ctrl+K to toggle dark mode
   });
 
   const renderPage = () => {
@@ -32,16 +47,12 @@ function App() {
       <Navbar
         currentPage={currentPage}
         onNavigate={setCurrentPage}
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
       />
       <main className="main-content">
         {renderPage()}
       </main>
-      <footer className="footer">
-        © {new Date().getFullYear()} Pulse. All rights reserved. Made with ❤️ by{' '}
-        <a href="https://github.com/sandbanks" target="_blank" rel="noopener noreferrer">
-          Sandbanks
-        </a>
-      </footer>
     </div>
   );
 }
