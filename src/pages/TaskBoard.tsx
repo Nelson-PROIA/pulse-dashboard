@@ -12,33 +12,54 @@ const COLUMNS: { key: TaskStatus; label: string }[] = [
 
 function TaskBoard() {
   const [filter, setFilter] = useState<string>('all');
-
-  const filteredTasks = filter === 'all'
-    ? TASKS
-    : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
+
+  const filteredTasks = TASKS.filter((task) => {
+    const matchesFilter = filter === 'all'
+      ? true
+      : task.tags.includes(filter) || task.assignee === filter;
+
+    const matchesSearch = searchTerm.trim() === ''
+      ? true
+      : task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.assignee.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    return matchesFilter && matchesSearch;
+  });
 
   return (
     <div className="task-board">
       <header className="page-header">
         <h2>Task Board</h2>
-        <div className="task-filters">
-          <button
-            className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            All
-          </button>
-          {allTags.slice(0, 6).map((tag) => (
+        <div className="task-controls">
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            className="task-search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="task-filters">
             <button
-              key={tag}
-              className={`filter-btn ${filter === tag ? 'active' : ''}`}
-              onClick={() => setFilter(tag)}
+              className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+              onClick={() => setFilter('all')}
             >
-              {tag}
+              All
             </button>
-          ))}
+            {allTags.slice(0, 6).map((tag) => (
+              <button
+                key={tag}
+                className={`filter-btn ${filter === tag ? 'active' : ''}`}
+                onClick={() => setFilter(tag)}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 
