@@ -1,3 +1,4 @@
+import DarkModeToggle from './DarkModeToggle';
 import './Navbar.css';
 
 interface NavbarProps {
@@ -41,6 +42,7 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
           </a>
         </li>
       </ul>
+      <DarkModeToggle />
     </nav>
   );
 }
