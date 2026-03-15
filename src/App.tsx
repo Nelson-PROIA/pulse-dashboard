@@ -36,6 +36,14 @@ function App() {
       <main className="main-content">
         {renderPage()}
       </main>
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Pulse. All rights reserved.</p>
+        <div className="footer-links">
+          <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -9,3 +9,29 @@
 .main-content {
   flex: 1;
 }
+
+.footer {
+  background: var(--navbar-bg);
+  color: var(--navbar-text);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: var(--navbar-link);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover {
+  color: white;
+}
