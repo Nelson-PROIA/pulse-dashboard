@@ -25,14 +25,14 @@
 .navbar-logo {
   width: 28px;
   height: 28px;
-  background: var(--accent);
   border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  color: white;
 }
 
 .navbar-links {
@@ -62,4 +62,29 @@
 .navbar-links a.active {
   background: rgba(255, 255, 255, 0.15);
   color: white;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--navbar-link);
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
 }
