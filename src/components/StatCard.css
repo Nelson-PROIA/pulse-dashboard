@@ -1,0 +1,44 @@
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-h);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.stat-trend {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.trend-up {
+  color: #22c55e;
+}
+
+.trend-down {
+  color: #ef4444;
+}
+
+.stat-subtitle {
+  font-size: 0.8rem;
+  color: var(--text);
+}
