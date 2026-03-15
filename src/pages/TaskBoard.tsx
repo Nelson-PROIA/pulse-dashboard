@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import TaskCard from '../components/TaskCard';
-import { TASKS } from '../data/mock';
+import { TASKS, TEAM } from '../data/mock';
 import type { TaskStatus } from '../data/types';
 import './TaskBoard.css';
 
@@ -18,6 +18,7 @@ function TaskBoard() {
     : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
+  const allAssignees = [...new Set(TEAM.map((member) => member.name))];
 
   return (
     <div className="task-board">
@@ -37,6 +38,16 @@ function TaskBoard() {
               onClick={() => setFilter(tag)}
             >
               {tag}
+            </button>
+          ))}
+          {allAssignees.map((assignee) => (
+            <button
+              key={assignee}
+              className={`filter-btn ${filter === assignee ? 'active' : ''}`}
+              onClick={() => setFilter(assignee)}
+              title={assignee}
+            >
+              {assignee.split(' ').map(n => n[0]).join('')}
             </button>
           ))}
         </div>
