@@ -13,9 +13,6 @@
   --navbar-text: #f1f5f9;
   --navbar-link: #94a3b8;
 
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
-
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.5;
@@ -24,6 +21,21 @@
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='dark'] {
+  --text: #94a3b8;
+  --text-h: #f1f5f9;
+  --bg: #0f172a;
+  --border: #334155;
+  --card-bg: #1e293b;
+  --accent-bg: rgba(99, 102, 241, 0.2);
+  --accent-border: rgba(99, 102, 241, 0.5);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+  --navbar-bg: #1e293b;
+  --navbar-text: #f1f5f9;
+  --navbar-link: #cbd5e1;
 }
 
 * {
@@ -54,4 +66,27 @@ code {
   border-radius: 4px;
   background: var(--accent-bg);
   color: var(--accent);
+}
+
+/* Define Inter font */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('https://rsms.me/inter/font-files/Inter-roman.var.woff?v=3.19') format('woff-variations');
+}
+
+/* Define JetBrains Mono font */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@master/web/woff2/JetBrainsMono-Variable.woff2') format('woff2-variations');
+}
+
+:root {
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
 }

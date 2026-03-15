@@ -25,8 +25,8 @@
 .navbar-logo {
   width: 28px;
   height: 28px;
-  background: var(--accent);
   border-radius: 6px;
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,3 +63,21 @@
   background: rgba(255, 255, 255, 0.15);
   color: white;
 }
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--navbar-link);
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  transition: color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  color: white;
+}
+
