@@ -1,35 +1,11 @@
 .app {
   min-height: 100vh;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
 }
 
-.content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.content h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.card {
-  padding: 2em;
-}
-
-.card button {
-  font-size: 1rem;
-  padding: 0.6em 1.2em;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  background-color: #1a1a2e;
-  color: white;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-.card button:hover {
-  border-color: #646cff;
+.main-content {
+  flex: 1;
 }
