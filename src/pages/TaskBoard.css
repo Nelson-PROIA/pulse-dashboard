@@ -11,6 +11,7 @@
   gap: 0.35rem;
   margin-top: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filter-btn {
@@ -34,6 +35,44 @@
   background: var(--accent);
   color: white;
   border-color: var(--accent);
+}
+
+/* Search wrapper — controls spacing relative to filter buttons */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 0.15rem;
+}
+
+/* Search input — mirrors .filter-btn visual language */
+.search-input {
+  height: 2rem;
+  padding: 0 0.75rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  min-width: 200px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text);
+  opacity: 0.45;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/* Native clear button (Chrome/Safari) — tint to match theme */
+.search-input::-webkit-search-cancel-button {
+  filter: invert(0.5);
+  cursor: pointer;
 }
 
 .columns {
