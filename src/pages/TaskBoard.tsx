@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TaskCard from '../components/TaskCard';
 import { TASKS } from '../data/mock';
-import type { TaskStatus } from '../data/types';
+import type { Task, TaskStatus } from '../data/types';
 import './TaskBoard.css';
 
 const COLUMNS: { key: TaskStatus; label: string }[] = [
@@ -12,10 +12,18 @@ const COLUMNS: { key: TaskStatus; label: string }[] = [
 
 function TaskBoard() {
   const [filter, setFilter] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const filteredTasks = filter === 'all'
-    ? TASKS
-    : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
+  const matchesSearch = (task: Task): boolean =>
+    normalizedSearch === '' ||
+    task.title.toLowerCase().includes(normalizedSearch);
+
+  const matchesFilter = (task: Task): boolean =>
+    filter === 'all' ||
+    task.tags.includes(filter) ||
+    task.assignee === filter;
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
 
@@ -24,6 +32,16 @@ function TaskBoard() {
       <header className="page-header">
         <h2>Task Board</h2>
         <div className="task-filters">
+          <div className="search-wrapper">
+            <input
+              type="search"
+              className="search-input"
+              placeholder="Search tasks…"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Search tasks by title"
+            />
+          </div>
           <button
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
@@ -44,7 +62,9 @@ function TaskBoard() {
 
       <div className="columns">
         {COLUMNS.map((col) => {
-          const tasks = filteredTasks.filter((t) => t.status === col.key);
+          const tasks = TASKS.filter(
+            (t) => t.status === col.key && matchesFilter(t) && matchesSearch(t)
+          );
           return (
             <div key={col.key} className="column">
               <div className="column-header">
