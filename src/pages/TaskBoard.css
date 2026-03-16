@@ -6,6 +6,76 @@
   min-height: calc(100vh - 56px);
 }
 
+/* Search bar container */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+/* Icon positioned inside the input on the left */
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-muted, #94a3b8);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* The input field itself */
+.search-input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 2.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted, #94a3b8);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Native clear button reset for type="search" */
+.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Custom clear button */
+.search-clear {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted, #94a3b8);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear:hover {
+  color: var(--text);
+}
+
 .task-filters {
   display: flex;
   gap: 0.35rem;
