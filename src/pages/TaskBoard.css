@@ -85,3 +85,46 @@
   border: 1px dashed var(--border);
   border-radius: 8px;
 }
+
+/* Search bar container — sits in .page-header above .task-filters */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+/* Search input — mirrors .filter-btn visual language */
+.search-input {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-family: var(--sans);
+  width: 220px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+  appearance: none;
+}
+
+.search-input::placeholder {
+  color: var(--text);
+  opacity: 0.45;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Responsive: full-width on narrow viewports */
+@media (max-width: 600px) {
+  .search-input {
+    width: 100%;
+  }
+
+  .search-bar-container {
+    width: 100%;
+  }
+}
