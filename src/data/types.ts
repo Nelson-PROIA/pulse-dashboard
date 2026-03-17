@@ -1,3 +1,5 @@
+export type Theme = 'light' | 'dark';
+
 export type TaskStatus = 'todo' | 'in-progress' | 'done';
 export type Priority = 'low' | 'medium' | 'high';
 
