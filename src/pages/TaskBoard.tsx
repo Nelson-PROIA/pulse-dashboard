@@ -12,10 +12,25 @@ const COLUMNS: { key: TaskStatus; label: string }[] = [
 
 function TaskBoard() {
   const [filter, setFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredTasks = filter === 'all'
-    ? TASKS
-    : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+
+  const filteredTasks = TASKS.filter((task) => {
+    const matchesFilter =
+      filter === 'all' ||
+      task.tags.includes(filter) ||
+      task.assignee === filter;
+
+    const matchesSearch =
+      normalizedQuery === '' ||
+      task.title.toLowerCase().includes(normalizedQuery) ||
+      task.description.toLowerCase().includes(normalizedQuery) ||
+      task.assignee.toLowerCase().includes(normalizedQuery) ||
+      task.tags.some((tag) => tag.toLowerCase().includes(normalizedQuery));
+
+    return matchesFilter && matchesSearch;
+  });
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
 
@@ -23,10 +38,23 @@ function TaskBoard() {
     <div className="task-board">
       <header className="page-header">
         <h2>Task Board</h2>
+        <div className="search-bar-container">
+          <input
+            type="search"
+            className="search-input"
+            placeholder="Search tasks…"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search tasks"
+          />
+        </div>
         <div className="task-filters">
           <button
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-            onClick={() => setFilter('all')}
+            onClick={() => {
+              setFilter('all');
+              setSearchQuery('');
+            }}
           >
             All
           </button>
@@ -34,7 +62,10 @@ function TaskBoard() {
             <button
               key={tag}
               className={`filter-btn ${filter === tag ? 'active' : ''}`}
-              onClick={() => setFilter(tag)}
+              onClick={() => {
+                setFilter(tag);
+                setSearchQuery('');
+              }}
             >
               {tag}
             </button>
