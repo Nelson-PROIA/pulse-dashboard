@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import TaskBoard from './pages/TaskBoard';
@@ -7,7 +8,19 @@ import { useKeyboard } from './hooks/useKeyboard';
 import './App.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useLocalStorage('pulse-page', 'dashboard');
+  const [currentPage, setCurrentPage] = useLocalStorage<string>('pulse-page', 'dashboard');
+  const [darkMode, setDarkMode] = useLocalStorage<boolean>('pulse-theme-dark', false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      'data-theme',
+      darkMode ? 'dark' : 'light'
+    );
+  }, [darkMode]);
+
+  const handleToggleDarkMode = () => {
+    setDarkMode((prev: boolean) => !prev);
+  };
 
   // Keyboard shortcuts
   useKeyboard({
@@ -32,6 +45,8 @@ function App() {
       <Navbar
         currentPage={currentPage}
         onNavigate={setCurrentPage}
+        darkMode={darkMode}
+        onToggleDarkMode={handleToggleDarkMode}
       />
       <main className="main-content">
         {renderPage()}
