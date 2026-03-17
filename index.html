@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pulse — Team Dashboard</title>
+    <script>
+      (function() {
+        try {
+          var dark = JSON.parse(localStorage.getItem('pulse-dark-mode'));
+          if (dark === true) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
