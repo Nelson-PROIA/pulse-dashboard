@@ -12,10 +12,23 @@ const COLUMNS: { key: TaskStatus; label: string }[] = [
 
 function TaskBoard() {
   const [filter, setFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredTasks = filter === 'all'
+  const handleFilterChange = (newFilter: string) => {
+    setFilter(newFilter);
+    // Clear search when switching tag filter to avoid confusing compound-filter state
+    setSearchQuery('');
+  };
+
+  const tagFilteredTasks = filter === 'all'
     ? TASKS
     : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
+
+  const filteredTasks = searchQuery.trim() === ''
+    ? tagFilteredTasks
+    : tagFilteredTasks.filter((task) =>
+        task.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
+      );
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
 
@@ -24,9 +37,31 @@ function TaskBoard() {
       <header className="page-header">
         <h2>Task Board</h2>
         <div className="task-filters">
+          {/* Search input */}
+          <div className="search-wrapper">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search tasks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search tasks by title"
+            />
+            {searchQuery && (
+              <button
+                className="search-clear"
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+              >
+                &times;
+              </button>
+            )}
+          </div>
+
+          {/* Tag / assignee filter buttons */}
           <button
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-            onClick={() => setFilter('all')}
+            onClick={() => handleFilterChange('all')}
           >
             All
           </button>
@@ -34,7 +69,7 @@ function TaskBoard() {
             <button
               key={tag}
               className={`filter-btn ${filter === tag ? 'active' : ''}`}
-              onClick={() => setFilter(tag)}
+              onClick={() => handleFilterChange(tag)}
             >
               {tag}
             </button>
@@ -44,19 +79,22 @@ function TaskBoard() {
 
       <div className="columns">
         {COLUMNS.map((col) => {
-          const tasks = filteredTasks.filter((t) => t.status === col.key);
+          const columnTasks = filteredTasks.filter((t) => t.status === col.key);
           return (
             <div key={col.key} className="column">
               <div className="column-header">
                 <h3>{col.label}</h3>
-                <span className="column-count">{tasks.length}</span>
+                <span className="column-count">{columnTasks.length}</span>
               </div>
               <div className="column-tasks">
-                {tasks.map((task) => (
-                  <TaskCard key={task.id} task={task} />
-                ))}
-                {tasks.length === 0 && (
-                  <div className="column-empty">No tasks</div>
+                {columnTasks.length === 0 ? (
+                  <div className="column-empty">
+                    {searchQuery.trim() !== '' ? 'No tasks match your search.' : 'No tasks'}
+                  </div>
+                ) : (
+                  columnTasks.map((task) => (
+                    <TaskCard key={task.id} task={task} />
+                  ))
                 )}
               </div>
             </div>

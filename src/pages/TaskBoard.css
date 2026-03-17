@@ -11,6 +11,7 @@
   gap: 0.35rem;
   margin-top: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filter-btn {
@@ -34,6 +35,59 @@
   background: var(--accent);
   color: white;
   border-color: var(--accent);
+}
+
+/* Search input */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 0.25rem;
+}
+
+.search-input {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-family: var(--sans);
+  padding: 0.3rem 2rem 0.3rem 0.75rem;
+  width: 220px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.search-clear:hover {
+  opacity: 1;
+  color: var(--text-h);
 }
 
 .columns {
@@ -78,10 +132,11 @@
 }
 
 .column-empty {
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
   color: var(--text);
   font-size: 0.85rem;
   border: 1px dashed var(--border);
   border-radius: 8px;
+  opacity: 0.8;
 }
