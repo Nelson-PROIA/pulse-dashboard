@@ -26,8 +26,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme="dark"] {
+  --text: #8b949e;
+  --text-h: #e6edf3;
+  --bg: #0d1117;
+  --border: #30363d;
+  --card-bg: #161b22;
+  --accent: #58a6ff;
+  --accent-bg: rgba(88, 166, 255, 0.1);
+  --accent-border: rgba(88, 166, 255, 0.3);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  --navbar-bg: #161b22;
+  --navbar-text: #e6edf3;
+  --navbar-link: #8b949e;
+}
+
 * {
   box-sizing: border-box;
+}
+
+body,
+.app,
+.navbar,
+.stat-card,
+.project-card,
+.task-card,
+.member-card,
+.column-empty,
+.filter-btn {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 body {
