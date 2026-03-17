@@ -12,10 +12,13 @@ const COLUMNS: { key: TaskStatus; label: string }[] = [
 
 function TaskBoard() {
   const [filter, setFilter] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const filteredTasks = filter === 'all'
-    ? TASKS
-    : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
+  const filteredTasks = TASKS.filter((t) => {
+    if (filter !== 'all' && !t.tags.includes(filter) && t.assignee !== filter) return false;
+    if (searchTerm && !t.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    return true;
+  });
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
 
@@ -24,6 +27,25 @@ function TaskBoard() {
       <header className="page-header">
         <h2>Task Board</h2>
         <div className="task-filters">
+          <div className="task-search">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search tasks..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Search tasks by title"
+            />
+            {searchTerm && (
+              <button
+                className="search-clear"
+                onClick={() => setSearchTerm('')}
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
           <button
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
@@ -56,7 +78,9 @@ function TaskBoard() {
                   <TaskCard key={task.id} task={task} />
                 ))}
                 {tasks.length === 0 && (
-                  <div className="column-empty">No tasks</div>
+                  <div className="column-empty">
+                    {searchTerm ? `No tasks matching "${searchTerm}"` : 'No tasks'}
+                  </div>
                 )}
               </div>
             </div>
