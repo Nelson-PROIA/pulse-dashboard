@@ -11,6 +11,7 @@
   gap: 0.35rem;
   margin-top: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filter-btn {
@@ -84,4 +85,53 @@
   font-size: 0.85rem;
   border: 1px dashed var(--border);
   border-radius: 8px;
+}
+
+/* ── Task Search ────────────────────────────────────────── */
+.task-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 0.25rem;
+}
+
+.search-input {
+  padding: 0.4rem 2rem 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.875rem;
+  width: 220px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  font-family: var(--sans);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted, #888);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted, #888);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.search-clear:hover {
+  color: var(--text);
 }
