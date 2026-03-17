@@ -12,10 +12,20 @@ const COLUMNS: { key: TaskStatus; label: string }[] = [
 
 function TaskBoard() {
   const [filter, setFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredTasks = filter === 'all'
-    ? TASKS
-    : TASKS.filter((t) => t.tags.includes(filter) || t.assignee === filter);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+
+  const filteredTasks = TASKS
+    .filter((task) =>
+      normalizedQuery === ''
+        ? true
+        : task.title?.toLowerCase().includes(normalizedQuery)
+    )
+    .filter((task) => {
+      if (filter === 'all') return true;
+      return task.tags.includes(filter) || task.assignee === filter;
+    });
 
   const allTags = [...new Set(TASKS.flatMap((t) => t.tags))];
 
@@ -23,6 +33,20 @@ function TaskBoard() {
     <div className="task-board">
       <header className="page-header">
         <h2>Task Board</h2>
+
+        {/* Search bar */}
+        <div className="search-bar-container">
+          <input
+            type="search"
+            className="search-input"
+            placeholder="Search tasks…"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search tasks by title"
+          />
+        </div>
+
+        {/* Filter buttons */}
         <div className="task-filters">
           <button
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
@@ -52,10 +76,15 @@ function TaskBoard() {
                 <span className="column-count">{tasks.length}</span>
               </div>
               <div className="column-tasks">
-                {tasks.map((task) => (
-                  <TaskCard key={task.id} task={task} />
-                ))}
-                {tasks.length === 0 && (
+                {tasks.length > 0 ? (
+                  tasks.map((task) => (
+                    <TaskCard key={task.id} task={task} />
+                  ))
+                ) : normalizedQuery !== '' ? (
+                  <p className="no-results">
+                    No tasks match <strong>&ldquo;{searchQuery}&rdquo;</strong>.
+                  </p>
+                ) : (
                   <div className="column-empty">No tasks</div>
                 )}
               </div>

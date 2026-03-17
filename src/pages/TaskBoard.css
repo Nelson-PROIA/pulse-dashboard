@@ -85,3 +85,46 @@
   border: 1px dashed var(--border);
   border-radius: 8px;
 }
+
+/* ── Search Bar ──────────────────────────────────────────────── */
+.search-bar-container {
+  margin-top: 0.75rem;
+  margin-bottom: 0; /* filter buttons add their own top margin via .task-filters */
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: var(--card-bg);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted, #888);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Native clear button (Chrome/Safari) */
+.search-input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* ── Empty State ─────────────────────────────────────────────── */
+.no-results {
+  color: var(--text-muted, #888);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+  line-height: 1.5;
+}
